@@ -1,6 +1,8 @@
+const perf = require('execution-time')();
 const fs = require('fs');
 const readline = require('readline');
 
+perf.start()
 const document = new Map();
 
 const rd = readline.createInterface({
@@ -25,4 +27,6 @@ rd.on('close', () => {
     }
 
     console.log(result);
+    const results = perf.stop();
+    console.log(`Time to finish - ${results.time} ms`);
 });

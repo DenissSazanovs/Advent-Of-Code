@@ -1,6 +1,8 @@
+const perf = require('execution-time')();
 const fs = require('fs');
 const readline = require('readline');
 
+perf.start();
 let result = 1;
 const document = new Map();
 
@@ -21,4 +23,6 @@ rd.on('close', () => {
         result *= Array.from({ length: time }, (_, timeToHold) => (time - timeToHold) * timeToHold > distance).filter(Boolean).length; //for loop actually works faster, but just wanted to try this approach
     } 
     console.log(result);
+    const results = perf.stop();
+    console.log(`Time to finish - ${results.time} ms`);
 });
