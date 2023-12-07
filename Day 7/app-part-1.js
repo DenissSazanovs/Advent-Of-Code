@@ -19,7 +19,6 @@ const customOrder = {
 };
 
 perf.start();
-let result = 0;
 let game = [];
 
 const rd = readline.createInterface({
