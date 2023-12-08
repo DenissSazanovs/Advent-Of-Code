@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "execution-time": "^1.4.1"
+    "execution-time": "^1.4.1",
+    "lcm": "^0.0.3"
   }
 }
