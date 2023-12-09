@@ -37,7 +37,6 @@ rd.on('line', (line) => {
 rd.on('close', () => {
     startingPoints.forEach((point) => {
         let steps = 0;
-        
         let directionIndex = 0;
     
         while (point[2] !== 'Z') {
