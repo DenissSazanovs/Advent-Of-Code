@@ -1,8 +1,15 @@
-const fs = require('fs');
-const readline = require('readline');
+import perf from 'execution-time';
+import fs from 'fs';
+import readline from 'readline';
+import { fileURLToPath } from 'url';
+import path from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 let result = 0;
 
+perf().start();
 const arrayToArrays = (array) => {
     const resultArray = [];
   
@@ -15,7 +22,7 @@ const arrayToArrays = (array) => {
   };
 
 const rd = readline.createInterface({
-    input: fs.createReadStream('data'),
+    input: fs.createReadStream(`${__dirname}/data`),
     console: false
 });
 
@@ -34,6 +41,7 @@ rd.on('line', (line) => {
 });
 
 rd.on('close', () => {
-    console.log('Finished');
     console.log(result);
+    const results = perf().stop();
+    console.log(`Time to finish - ${results.time} ms`);
 });

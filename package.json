@@ -1,6 +1,35 @@
 {
+  "name": "advent-of-code",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
   "dependencies": {
+    "data-uri-to-buffer": "^4.0.1",
+    "dotenv": "^16.3.1",
     "execution-time": "^1.4.1",
-    "lcm": "^0.0.3"
-  }
+    "fetch-blob": "^3.2.0",
+    "formdata-polyfill": "^4.0.10",
+    "gcd": "^0.0.1",
+    "lcm": "^0.0.3",
+    "node-domexception": "^1.0.0",
+    "node-fetch": "^3.3.2",
+    "pretty-hrtime": "^1.0.3",
+    "web-streams-polyfill": "^3.2.1"
+  },
+  "scripts": {
+    "data": "node ./helpers/getData.js",
+    "start": "node ./helpers/runScript.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DenissSazanovs/Advent-Of-Code.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DenissSazanovs/Advent-Of-Code/issues"
+  },
+  "homepage": "https://github.com/DenissSazanovs/Advent-Of-Code#readme"
 }

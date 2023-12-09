@@ -1,7 +1,13 @@
-const perf = require('execution-time')();
-const fs = require('fs');
-const readline = require('readline');
-const lcm = require('lcm');
+import perf from 'execution-time';
+import fs from 'fs';
+import readline from 'readline';
+import { fileURLToPath } from 'url';
+import pathFile from 'path';
+import lcm from 'lcm';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = pathFile.dirname(__filename);
+
 
 const startingPoints = [];
 const leftPart = {};
@@ -10,10 +16,10 @@ let directions;
 
 let result = 1;
 
-perf.start();
+perf().start();
 
 const rd = readline.createInterface({
-    input: fs.createReadStream('data'),
+    input: fs.createReadStream(`${__dirname}/data`),
     console: false
 });
 
@@ -56,6 +62,6 @@ rd.on('close', () => {
     });
 
     console.log(result);
-    const results = perf.stop();
+    const results = perf().stop();
     console.log(`Time to finish - ${results.time} ms`);
 });

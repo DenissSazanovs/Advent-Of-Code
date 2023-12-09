@@ -1,14 +1,20 @@
-const perf = require('execution-time')();
-const fs = require('fs');
-const readline = require('readline');
+import perf from 'execution-time';
+import fs from 'fs';
+import readline from 'readline';
+import { fileURLToPath } from 'url';
+import pathFile from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = pathFile.dirname(__filename);
+
 const route = new Map();
 const directions = new Map([['R', 1], ['L', 0]]);
 const path = [];
 
-perf.start();
+perf().start();
 
 const rd = readline.createInterface({
-    input: fs.createReadStream('data'),
+    input: fs.createReadStream(`${__dirname}/data`),
     console: false
 });
 
@@ -25,7 +31,7 @@ rd.on('line', (line) => {
 
 rd.on('close', () => {
     console.log(move('AAA', path, route));
-    const results = perf.stop();
+    const results = perf().stop();
     console.log(`Time to finish - ${results.time} ms`);
 });
 

@@ -1,5 +1,11 @@
-const fs = require('fs');
-const readline = require('readline');
+import perf from 'execution-time';
+import fs from 'fs';
+import readline from 'readline';
+import { fileURLToPath } from 'url';
+import path from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const lines = [];
 const symbolRegex = /\*/g;
@@ -8,8 +14,9 @@ const numbersRegex = /\d+/g;
 let result = 0;
 let currentLine, previousLine, nextLine;
 
+perf().start();
 const rd = readline.createInterface({
-    input: fs.createReadStream('data'),
+    input: fs.createReadStream(`${__dirname}/data`),
     console: false
 });
 
@@ -64,4 +71,6 @@ rd.on('close', () => {
         }
     });
     console.log(result);
+    const results = perf().stop();
+    console.log(`Time to finish - ${results.time} ms`);
 });

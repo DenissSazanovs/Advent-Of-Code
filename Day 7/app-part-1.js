@@ -1,6 +1,11 @@
-const perf = require('execution-time')();
-const fs = require('fs');
-const readline = require('readline');
+import perf from 'execution-time';
+import fs from 'fs';
+import readline from 'readline';
+import { fileURLToPath } from 'url';
+import path from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const customOrder = {
     A: 114,
@@ -18,11 +23,11 @@ const customOrder = {
     '2': 102,
 };
 
-perf.start();
+perf().start();
 let game = [];
 
 const rd = readline.createInterface({
-    input: fs.createReadStream('data'),
+    input: fs.createReadStream(`${__dirname}/data`),
     console: false
 });
 
@@ -48,5 +53,6 @@ rd.on('close', () => {
     }
 
     console.log(result);
-    console.log(`Time to finish - ${perf.stop().time} ms`);
+    const results = perf().stop();
+    console.log(`Time to finish - ${results.time} ms`);
 });

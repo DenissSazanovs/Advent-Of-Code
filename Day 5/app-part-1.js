@@ -1,14 +1,19 @@
-const perf = require('execution-time')();
-const fs = require('fs');
-const readline = require('readline');
+import perf from 'execution-time';
+import fs from 'fs';
+import readline from 'readline';
+import { fileURLToPath } from 'url';
+import path from 'path';
 
-perf.start();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+perf().start();
 let result = [];
 const seedPath = [[]];
 const regExp = /[a-zA-Z]/;
 
 const rd = readline.createInterface({
-    input: fs.createReadStream('data'),
+    input: fs.createReadStream(`${__dirname}/data`),
     console: false
 });
 
@@ -47,6 +52,6 @@ rd.on('close', () => {
         result.push(element);
     });
     console.log(Math.min(...result));
-    const results = perf.stop();
+    const results = perf().stop();
     console.log(`Time to finish - ${results.time} ms`);
 });
