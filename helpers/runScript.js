@@ -7,7 +7,7 @@ const __dirname = path.dirname(__filename).replace('/\s/g', '\ ');
 
 const [, , day, part] = process.argv;
 
-const scriptPath = path.join(__dirname + '/..', `Day ${day}`, `app-part-${part}.js`);
+const scriptPath = path.join(__dirname + '/..', `2024/Day ${day}`, `app-part-${part}.js`);
 
 try {
   execSync(`node "${scriptPath}"`, { stdio: 'inherit' });

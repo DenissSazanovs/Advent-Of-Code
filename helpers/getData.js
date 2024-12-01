@@ -2,7 +2,7 @@ import fetch from 'node-fetch';
 import fs from 'fs/promises';
 import 'dotenv/config';
 
-const filePath = `Day ${process.argv[2]}/data`; // Specify the desired file path
+const filePath = `2024/Day ${process.argv[2]}/data`; // Specify the desired file path
 
 // Check if the file exists
 try {
@@ -10,7 +10,7 @@ try {
     console.log('File already exists. If you want to download a new file, remove the previous one.');
 } catch (error) {
     // File doesn't exist, make a new request
-    const response = await fetch(`https://adventofcode.com/2023/day/${process.argv[2]}/input`, {
+    const response = await fetch(`https://adventofcode.com/2024/day/${process.argv[2]}/input`, {
         method: 'get',
         headers: {
             "Cookie": `session=${process.env.COOKIE}`
