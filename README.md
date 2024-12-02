@@ -1,6 +1,6 @@
-# Advent Of Code 2023
+# Advent Of Code 2023 - 2024
 
-Welcome to the Advent Of Code 2023 project! This project is designed to help you solve Advent of Code challenges for the year 2023.
+Welcome to the Advent Of Code project!
 
 ## Setup
 
