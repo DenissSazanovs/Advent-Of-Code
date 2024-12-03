@@ -12,7 +12,7 @@ perf().start();
 let finalResult = 0;
 
 const rd = fs.readFile(`${__dirname}/data`, 'utf8', (err, data) => {
-    if (err) throw err; // Handle error if any
+    if (err) throw err; 
     const regex = /(?=do\(\))|(?=don't\(\))/g;
     const parts = data.split(regex);
 
