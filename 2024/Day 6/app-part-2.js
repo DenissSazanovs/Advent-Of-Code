@@ -16,22 +16,23 @@ const rd = readline.createInterface({
 });
 
 const movement = [[-1, 0], [0, 1], [1, 0], [0, -1]];
-const map = [];
+const originalMap = [];
 const uniqueCor = new Set();
+const isLooped = new Set();
+let loop = 0;
 
 let guardPos;
-let notExited = true;
 
-rd.on('line', (line) => {
-    map.push(line.split(''));
-    if (line.includes('^')) {
-        guardPos = [map.length - 1, line.indexOf('^')];
-        uniqueCor.add(`${guardPos[1]},${guardPos[0]}`);
-    }
-});
-
-rd.on('close', () => {
+const moveIt = (map, guardPos, wall) => {
+    isLooped.clear();
     let movingDir = 0;
+    let notExited = true;
+
+    if (wall) {
+        const wallCor = wall.split(',');
+        map[Number(wallCor[0])][Number(wallCor[1])] = '#';
+    }
+
     while (notExited) {
         let nextPosX, nextPosY;
 
@@ -51,15 +52,38 @@ rd.on('close', () => {
         };
 
         if (map[nextPosY][nextPosX] === '#') {
-            // console.log(nextPosY, nextPosX);
             movingDir += 1;
             continue;
         } 
 
         guardPos = [nextPosY, nextPosX];
-        uniqueCor.add(`${nextPosY},${nextPosX}`);
+        if (isLooped.has(`${guardPos[0]},${guardPos[1]}:${movingDir}`)) {
+            loop += 1;
+            notExited = false;
+        };
+        isLooped.add(`${guardPos[0]},${guardPos[1]}:${movingDir}`);
+
+
+        if (!wall) {
+            uniqueCor.add(`${nextPosY},${nextPosX}`);
+        }
     }
+}
+
+rd.on('line', (line) => {
+    originalMap.push(line.split(''));
+    if (line.includes('^')) {
+        guardPos = [originalMap.length - 1, line.indexOf('^')];
+        uniqueCor.add(`${guardPos[0]},${guardPos[1]}`);
+    }
+});
+
+rd.on('close', () => {
+    moveIt(JSON.parse(JSON.stringify(originalMap)), guardPos);
+    for (const position of uniqueCor) {
+        moveIt(JSON.parse(JSON.stringify(originalMap)), guardPos, position);
+    }
+    console.log(loop);
     const results = perf().stop();
     console.log(`Time to finish - ${results.time} ms`);
-    console.log(uniqueCor.size);
 });
