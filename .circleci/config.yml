@@ -1,0 +1,34 @@
+version: 2.1
+
+orbs:
+  cci-notifier: twilio/cci-notifier@0.0.1
+
+jobs:
+  test:
+    docker:
+      - image: cimg/go:1.22
+    steps:
+      - checkout
+      - run:
+          name: "Simulate"
+          command: |
+            export HTML_REPORTS_DIR="./reports"
+            browserVersion="15.1"
+            runDescription="Default"
+      - cci-notifier/parse-results:
+          reports_path: "$HTML_REPORTS_DIR"
+          target_results_path: "cci/test_results"
+          suite_prefix: "<< parameters.browser_name >>-$browserVersion-<< parameters.suite >>"
+          report_url: "https://output.circle-artifacts.com/output/job/$CIRCLE_WORKFLOW_JOB_ID/artifacts/$CIRCLE_NODE_INDEX/reports/report.html"
+          artifact_url: "$CIRCLE_BUILD_URL/artifacts"
+          job_url: "$CIRCLE_BUILD_URL"
+      - run:
+          name: "Simulate 2"
+          command: |
+            export PRODUCT_INFO=":js: Voice JSDK 1.0.0"
+            export SLACK_WEBHOOK="HOOK"
+      - cci-notifier/send-slack-notification:
+          test_results: "cci/test_results"
+          product_info: "$PRODUCT_INFO"
+          slack_channel: "$SLACK_WEBHOOK"
+          skip_results_check: true
