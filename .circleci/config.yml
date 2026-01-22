@@ -12,7 +12,7 @@ jobs:
       - run:
           name: "Simulate"
           command: |
-            export HTML_REPORTS_DIR="../reports"
+            echo "export HTML_REPORTS_DIR=../reports" >> $BASH_ENV
             browserVersion="15.1"
             runDescription="Default"
       - cci-notifier/parse-results:
