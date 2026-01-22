@@ -18,7 +18,7 @@ jobs:
       - cci-notifier/parse-results:
           reports_path: "$HTML_REPORTS_DIR"
           target_results_path: "cci/test_results"
-          suite_prefix: "<< parameters.browser_name >>-$browserVersion-<< parameters.suite >>"
+          suite_prefix: "Chrome>-$browserVersion-sfu"
           report_url: "https://output.circle-artifacts.com/output/job/$CIRCLE_WORKFLOW_JOB_ID/artifacts/$CIRCLE_NODE_INDEX/reports/report.html"
           artifact_url: "$CIRCLE_BUILD_URL/artifacts"
           job_url: "$CIRCLE_BUILD_URL"
