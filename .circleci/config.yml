@@ -25,8 +25,8 @@ jobs:
       - run:
           name: "Simulate 2"
           command: |
-            export PRODUCT_INFO=":js: Voice JSDK 1.0.0"
-            export SLACK_WEBHOOK="HOOK"
+            echo "export PRODUCT_INFO=':js: Voice JSDK 1.0.0'" >> $BASH_ENV
+            echo "export SLACK_WEBHOOK='HOOK'" >> $BASH_ENV
       - cci-notifier/send-slack-notification:
           test_results: "cci/test_results"
           product_info: $PRODUCT_INFO
