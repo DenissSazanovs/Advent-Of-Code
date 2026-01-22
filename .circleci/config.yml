@@ -32,3 +32,10 @@ jobs:
           product_info: "$PRODUCT_INFO"
           slack_channel: "$SLACK_WEBHOOK"
           skip_results_check: true
+
+workflows:
+  version: 2
+
+  workflow_status_checker:
+    jobs:
+      - test
