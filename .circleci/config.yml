@@ -12,7 +12,7 @@ jobs:
       - run:
           name: "Simulate"
           command: |
-            export HTML_REPORTS_DIR="./reports"
+            export HTML_REPORTS_DIR="../reports"
             browserVersion="15.1"
             runDescription="Default"
       - cci-notifier/parse-results:
