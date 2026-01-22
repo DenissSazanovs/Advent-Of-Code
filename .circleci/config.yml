@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  cci-notifier: twilio/cci-notifier@0.0.1
+  cci-notifier: sdksqe/cci-notifier@0.0.1
 
 jobs:
   test:
