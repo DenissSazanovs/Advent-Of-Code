@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  cci-notifier: sdksqe/cci-notifier@0.0.5
+  cci-notifier: sdksqe/cci-notifier@0.0.6
 
 jobs:
   test:
